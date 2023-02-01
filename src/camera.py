@@ -4,6 +4,8 @@ from scipy.spatial.transform import Rotation as R
 class Camera:
     """
     defines a camera where its center looks at +z
+    It stores a set of images where the first dimension
+    is the batch size.
     """
     def __init__(
             self, 
@@ -53,7 +55,7 @@ class Camera:
 
     def get_pixel_ray(
             self, x_idx:int, y_idx:int
-            ) -> tuple(np.array, np.array) :
+            ) :
         """
         retuens the ray approximate path and 
         its termnation point according to the updated 
@@ -74,7 +76,7 @@ class Camera:
 if __name__ == "__main__":
 
     # test the camera model
-    c = Camera((0,0,0), 90, 0, 0, 800, 600, 45, 45)
+    c = Camera((0,0,0), 90, 0, 0, 1000, 1000, 45, 45, np.random.randn(1, 3, 1000, 1000))
     c.canvas_size(1)
     print(c.get_pixel_ray(1,1))
 
